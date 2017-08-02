@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Helvetica, Arial, sans-serif; }
+  </style>
+</head>
+<body>
+    <form action="/edit_profile" method="POST">
+        <p><b>Edit your profile:</b></p>
+        <p>{{request.message()}}</p>
+        Username: <input type="text" name="username" value="{{user.username}}"><br>
+        First name: <input type="text" name="first_name" value="{{user.first_name}}"><br>
+        Last name: <input type="text" name="last_name" value="{{user.last_name}}"><br>
+        Email: <input type="text" name="email" value="{{user.email}}"><br>
+        <input type="submit" value="Update">
+    </form> 
+</body>
+</html>

@@ -1,0 +1,19 @@
+<h1>This is PyHP, a dirty hack</h1>
+
+<p>{% for x in range(10):%} {{x}} {% endfor %}</p>
+
+<p>Request parameters:</p>
+
+<pre>
+{
+{% for key, value in request.params.items(): %}    '{{key}}': '{{value}}',
+{% endfor %}}
+</pre>
+
+<p>Request headers are:</p>
+
+<pre>
+{
+{% for key, value in request.headers.items(): %}    '{{key}}': '{{value}}',
+{% endfor %}}
+</pre>

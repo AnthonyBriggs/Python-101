@@ -1,0 +1,24 @@
+TODO
+----
+
+Hopefully there won't be too many TODO items, this is supposed to be
+a simple program :)
+
+  - improve user account management (both admin and self-admin)
+      - edit profile, add pic, change username, email, etc.
+      - better registration / adding new users
+  - better HTML (eg. static message box)
+  - list of users / active users
+  - @username messaging, with a handy beep
+
+
+MAYBE
+
+  - Rooms?
+  - One-on-one chat?
+
+
+PROBABLY NOT
+
+  - file upload
+  

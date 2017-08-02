@@ -1,0 +1,20 @@
+Chat-thing
+----------
+
+Simple, free software chat program, a'la Slack, Campfire or Flowdock,
+written in Python 3.5 with as few dependencies as possible.
+
+Chat-thing is currently pre-alpha - it's stable, but not all of the 
+features that you would expect from a chat program are here yet. You
+can definitely use it to chat to people though, and it does links and
+kitten gifs :)
+
+If you have any questions, feel free to contact me via 
+<anthony.briggs@gmail.com> and I'll do my best to answer.
+
+Chat thing is released under the GNU Affero Public License v3, you can
+find a copy here if you don't have one with this README:
+(http://www.gnu.org/licenses/agpl.txt). AGPLv3 is GPLv3 with an extra
+paragraph in section 13, so that you can download a copy even when you 
+use this software over a network. 
+

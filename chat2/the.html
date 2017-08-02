@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="/static/websocket.js"></script>
+  <script type="text/javascript">
+    start("ws://{{config.websocket_server}}", "{{user.username if user else ''}}");
+  </script>
+  <link rel="stylesheet" href="/static/style.css" type="text/css" />
+  <title>Chat server</title>
+</head>
+<body>
+
+<audio id="notify" preload="true">
+    <source src="/static/fart_02.wav" type="audio/wav">
+    <source src="/static/fart_02.mp3" type="audio/wav">
+</audio>
+
+    <div id="user">
+        % if user:
+            <p>Logged in as {{user.first_name}} {{user.last_name}} ({{user.username}})
+            <span class="user-actions">
+                <a href="/logout">Log out</a> | 
+                <a href="/set_password">Change password</a> |
+                <a href="/edit_profile">Edit profile</a>
+            </span></p>
+        % else:
+            <form action="/login" method="POST">
+                <p><b>Login form</b></p>
+                Username: <input type="text" name="username" value=""><br>
+                Password: <input type="password" name="password" value=""><br>
+                <input type="submit" value="Login">
+            </form> 
+        % end
+    </div>
+    
+    <p>{{request.message()}}</p>
+    
+    % if user:
+        <div id="messages">
+        % for message in messages:
+            <p class="message">
+                <span class="name">{{message.user.first_name}} </span>
+                {{! message.content}}
+                <span class="date">{{(message.date + config.timezone).strftime("%Y-%m-%d %H:%M%p")}}</span>
+            </p>
+        % end
+        </div>
+        <form method="post" action="" enctype="text/plain" onsubmit="sendMessage(this.message.value); this.message.value=''; return false;">
+            <input type="text" name="message" value="">
+            <input type="submit" value="send">
+        </form>
+    % end
+    
+</body>
+</html>

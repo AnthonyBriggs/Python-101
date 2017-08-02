@@ -1,0 +1,7 @@
+body { font-family: Helvetica, Arial, sans-serif; }
+#user { border-bottom: 1px solid #229; }
+#user .user-actions { float: right; margin-right: 25px; }
+.message .date { font-size: 0.8em; color: #aaa; }
+.message .name { width: 100px; font-weight: bold; float: left; }
+.message img { max-height: 300px; max-width: 100%; }
+

@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>My Todo List</title>
+<style type="text/css">
+    body { font-family: Arial, Helvetica, sans-serif;
+           color: black;
+           background: #ffffff; }
+    .error { color: red; }              
+</style>
+</head>
+<body>
+<p>Welcome, {{user.username|title}}. <a href="logout">Log out</a></p>
+
+{% if error_msg %}
+    <p class="error">{{ error_msg }}</p>
+{% endif %}
+
+{% if todos %}
+<table border="1">
+<tr><td>del.</td><td>Todo</td><td>Importance</td><td>Description</td></tr>
+    {% for todo in todos %}
+        <tr>
+            <td><a href="{{todo.id}}/delete"><b>X</b></td>
+            <td><a href="{{todo.id}}">{{todo.title}}</a></td>
+            <td>{{todo.text_importance}}</td>
+            <td>{{todo.short_description}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>You have nothing to do!</p>
+{% endif %}
+
+<p>Add a todo:<br>
+<form action="add" method="POST">
+    Todo:<input type="text" name="title"><br>
+    Importance:<select name="importance" />
+    {% for value, importance in choices %}
+        <option value="{{value}}">{{importance}}</option>
+    {% endfor %}
+    </select><br>
+    <textarea name="description"></textarea>
+    <input type="submit" value="Add">
+</form>
+</p>
+
+</table>
+</body>
+</html>

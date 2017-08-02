@@ -1,0 +1,113 @@
+Installation
+------------
+
+These are hopefully-detailed-enough instructions on how to set up,
+configure and run the chat system.
+
+(TL;DR for experienced Python people:
+    - set up a Python 3.5 virtualenv
+    - install from requirements.txt
+    - edit config.py and users.txt to taste
+    - run both chat.py and chat_websocket.py
+    - login via your browser
+)
+
+If you have any questions, feel free to contact me via 
+<anthony.briggs@gmail.com> and I'll do my best to answer.
+    
+    
+1. Chat-thing uses websockets (https://github.com/aaugustin/websockets),
+   so it requires Python 3.5* - often you can install this from 
+   python.org, sometimes you might need to install from source. 
+
+   Detailed instructions on installing Python3.5 from source can be 
+   found at:
+       https://www.raspberrypi.org/forums/viewtopic.php?f=32&t=134828
+       (and http://www.extellisys.com/articles/python-on-debian-wheezy)
+
+1b. It's a good idea as well to use virtualenv and virtualenvwrapper
+    sudo pip install virtualenv virtualenvwrapper
+
+1c. You'll also need to set up some environment variables and run 
+    the virtualenv script. In Linux, add the following to the bottom of 
+    your .bashrc:
+    
+        export WORKON_HOME=$HOME/.venvs
+        export PIP_DOWNLOAD_CACHE=$HOME/.venvs/pip_cache
+        VIRTUALENVWRAPPER_PYTHON='/usr/local/bin/python3.5'
+        source /usr/local/bin/virtualenvwrapper.sh
+
+    then issue the command
+    
+        $ source ~/.bashrc
+        
+    You only need the VIRTUALENVWRAPPER_PYTHON line if you installed
+    Python 3.5 from source.
+
+
+2. Create a virtual environment
+
+       mkvirtualenv chat
+   
+   Then, when you want to run the chat server, issue
+    
+       $ workon chat
+   
+   You should see the virtual environment name on your command line:
+   
+       (chat) pi@raspberrypi ~/chat-thing $
+   
+   
+3. Install pre-requisites (from within the virtualenv):
+
+    $ cd chat-thing
+    $ pip install -r requirements.txt
+
+
+4. Copy and rename the sample config and user files to config.py 
+   and users.txt, and edit them with real values.
+   
+   If you're testing locally, using localhost:8080 and localhost:8081
+   are reasonable values. If you're testing on a machine on your local
+   network (eg. a raspberry pi), then put in its numeric ip address 
+   (eg. 10.1.1.2 or 192.168.1.1).
+   
+   The rest of the values should be obvious - operator/operator name
+   will appear in registration emails, mail_user and mail_password are
+   for your login details on your ISP's mail server, if necessary.
+
+   users.txt should have a comma separated list of people you'd like
+   to give accounts to. It's username, first name, last name and email,
+   in that order:
+   
+       # username, first_name, last_name, email
+       bob,Bob,Bobson,bob@example.com
+       system,System,,bob@example.com
+
+   The system user is for future use, I suspect that there might need
+   to be system messages at some point
+   
+   
+5. Now you can run the server. There are two parts - one written in 
+   Bottle to handle the web front end, and another for the websockets
+   (the real time chat bit). You'll need two terminal windows, both of
+   them need to be using the virtualenv:
+   
+       (chat) $ python chat.py
+       Bottle v0.12.9 server starting up (using WSGIRefServer())...
+       Listening on http://0.0.0.0:80/
+       Hit Ctrl-C to quit.
+       
+       (chat) $ python chat_websocket.py
+
+   chat_websocket won't give you any output at first. Once both of 
+   these are running, you can go to the URL that your server is running
+   on - something like http://localhost:8080/ or http://10.1.1.2/
+   depending on your config.py settings.
+   
+   
+--
+
+* Websockets can be made to work with 3.4 with a bit of hacking
+  (see http://websockets.readthedocs.io/en/stable/intro.html#python-3-5)
+  but that's left as an exercise - pick 3.5 if you can.

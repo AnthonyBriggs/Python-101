@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentation Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="css/style.css" media="all" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source" style="display: none;">
+
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+# Libraries
+
+---
+# "Batteries Included"
+
+--
+## Python has lots of libraries
+
+---
+
+![Long list of libraries](img/python_library_list_1.png) ![Another long list of libraries](img/python_library_list.png)
+---
+
+# "Batteries Included"
+
+## Python has lots of libraries
+
+## Like, tons. That's not counting PyPI
+
+--
+## And it's hard to know where to start
+---
+
+# What even is a library anyway?
+
+---
+name: default
+layout: true
+
+---
+.left-column[
+  ## Libraries
+]
+.right-column[
+## What's a library?
+
+A bunch of pre-written code that you can pull into your program.
+
+The simplest versions of a library are just one file, or a directory with an `__init__.py` file in it.
+]
+--
+.right-column[
+There are a couple of ways to import and use them.
+
+```
+import random
+random.choice((1,2,3,4,5,6))
+```
+]
+--
+.right-column[
+```
+from random import choice
+choice((1,2,3,4,5,6))
+```
+]
+--
+.right-column[
+```
+from random import *
+choice((1,2,3,4,5,6))
+```
+Don't do this last one unless the library supports it!
+]
+
+---
+.left-column[
+  ## Libraries
+]
+.right-column[
+## Some other methods
+
+```
+from random import choice, randint, shuffle
+choice((1,2,3,4,5,6))
+```
+]
+--
+.right-column[
+```
+from random import choice as roll
+d6 = (1,2,3,4,5,6)
+roll(d6)
+```
+]
+--
+.right-column[
+```
+import random, os, sys
+```
+]
+
+---
+.left-column[
+  ## Libraries
+]
+.right-column[
+## Caveats
+]
+--
+.right-column[
+**Circular imports** 
+
+If you import library A into B, and then B into A, you'll get a circular import (actually, an `AttributeError`. The solution is usually to pull the common code out into a third library, or merge the two.
+]
+--
+.right-column[
+**Library Shadowing** 
+
+If you create a library with the same name as a built-in, you won't be able to import the built-in: it'll just load the local version.
+]
+---
+.left-column[
+  ## Libraries
+]
+.right-column[
+## Testing libraries
+
+One thing that you'll see used quite often is to be able to test your library (or run it as a script) and import it separately.
+
+When you import a library, it'll run everything in the file.
+]
+--
+.right-column[
+To avoid that, you can use the `__name__ == '__main__'` trick.
+
+```
+if __name__ == '__main__':
+    # do things you don't want to do on import
+```
+]
+---
+.left-column[
+  ## Libraries
+  ## Using classes
+]
+.right-column[
+## Creating classes
+
+Most of the Python libraries use classes. We look at them in detail after lunch, but they're straightforward if you're just using them.
+]
+
+???
+ (We've already used lots of them, eg. when looking at string methods)
+--
+.right-column[
+Class instances can be returned from library functions
+
+```
+>>> import datetime
+>>> now = datetime.datetime.now()
+>>> now
+datetime.datetime(2017, 8, 2, 21, 10, 3, 271597)
+>>> type(now)
+<class 'datetime.datetime'>
+```
+]
+--
+.right-column[
+Or you can import the class and create instances directly.
+```
+>>> tut_start = datetime.datetime(2017, 8, 3, 9, 0, 0, 0)
+>>> tut_start
+datetime.datetime(2017, 8, 3, 9, 0)
+>>> type(tut_start)
+<class 'datetime.datetime'>
+```
+]
+
+---
+.left-column[
+  ## Libraries
+  ## Using classes
+]
+.right-column[
+## Using class instances
+
+The object that you create from a class is called a Class Instance. It stores specific data like day, month, year, and you can also poke at it with class methods.
+
+```
+>>> tut_start.strftime("%Y-%m-%d")
+'2017-08-03'
+>>> tut_start.replace(minute=10)
+datetime.datetime(2017, 8, 3, 9, 10)
+        # returns a new time
+```
+
+This is the case for everything in Python, though - numbers, lists, dictionaries, etc. Libraries are just a little more obvious about it.
+]
+
+---
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+
+# Ok, now let's look at some libraries
+
+---
+
+# Libraries
+
+## I've split these by function 
+
+### .pull-left[ General programming ]
+
+### Data storage
+
+### .pull-left[ Web clients ]
+
+### Web serving
+
+### .pull-left[ Email ]
+
+### Command line
+
+### .pull-left[ UI and games ]
+
+### Anything else?
+
+---
+name: inverse
+layout: true
+class: centerish, top, inverse
+
+---
+# Programming
+
+## os, sys, os.path, os.walk
+
+`os` and `os.path` are used for all sorts of file handling and manipulation: copy, delete, create directories, permissions, testing paths
+
+`sys` is mainly used for command line arguments (`sys.argv`) and exiting your program (`sys.exit()`)
+
+`os.walk` will recurse over a whole directory and return all the files and directories
+
+Lots of examples of these in the code samples
+
+---
+# Programming
+
+## collections
+
+Has extra data structures that can be useful in some situations
+
+`defaultdict` is a dictionary that will create new entries rather than raise a `KeyError`
+
+`namedtuple` is a lightweight data storage class
+
+```
+>>> Point = namedtuple('Point', ['x', 'y'])
+>>> p = Point(11, y=22)
+>>> p.x
+11
+```
+---
+# Programming
+
+## random
+
+Not just for random numbers, you can shuffle lists, pick a random choice.
+
+## sha / hexdigest
+
+Useful for testing identities of things (duplicate files, images)
+---
+# Programming
+
+## pprint
+
+Handy debugging tool, makes data structures much more readable.
+
+```
+>>> pp = pprint.PrettyPrinter(indent=4)
+>>> pp.pprint(stuff)
+```
+
+## logging
+
+Much easier than rolling your own (or print debugging in production)
+
+```
+import logging
+logging.basicConfig(filename='example.log',level=logging.INFO)
+logging.debug("This message won't go to the log file")
+logging.warning("This will, though")
+```
+---
+# Programming
+
+## testing: unittest, doctest, py.test
+
+`unittest` is based on the Java package, and has a very similar feel.
+
+`doctest` runs tests from the class or function's docstring.
+
+`py.test` is a 3rd party package which is a more lightweight, Pythonic version of unittest.
+
+```
+def inc(x):
+    return x + 1
+
+def test_answer():
+    assert inc(3) == 5
+```
+
+---
+# Data storage
+
+## json
+
+Turns dictionaries into JSON structures (slightly different dictionaries) and back again
+
+For configuration, you can just import a dictionary from a `config.py` file. 
+
+???
+dictionary.__repl__()
+
+---
+# Data storage
+
+## csv
+
+If you need to work with business types, or interoperate with something. It's kind of a linga franca of legacy systems.
+
+Just watch out for Excel autoconverting things. And if you're using Python 2, install unicodecsv
+
+---
+# Data storage
+
+## sqlite
+
+For structured data, where you need some normalisation, speed or slight multithreading, but don't want a full database.
+
+There's a 3rd party library called peewee which puts a lightweight ORM on top of sqlite.
+
+There are libraries for Postgres, MySQL, Oracle, etc. too, though.
+
+---
+# Data storage
+
+## Others
+
+There are other formats, like YAML or Pickle, but don't use them if you can help it.
+
+## TinyDB
+
+A lightweight NoSQL library, but not thread safe. Haven't tried it yet, but I plan to.
+
+---
+# Web 
+
+## Python web libraries 
+
+Builtins are generally kind of odd and split up. 
+- `urllib` for the request
+- `http.cookiejar` for cookie handling
+- `html.escape` for escaping html strings
+
+Requests is very good for general web client stuff.
+
+---
+# Web 
+
+## Parsing
+
+Hard to go past BeautifulSoup. It'll parse pretty much any web page.
+
+If you know that you have decent markup, then the built in libraries, `html`, `xml.etree`, `xml.dom`, `xml.sax` work pretty well.
+
+I've heard good things about zeep if you need to handle SOAP and WSDL, but I haven't used it.
+
+---
+# Web
+
+## Serving
+
+For lightweight servers (eg. serving a simple API or app), Bottle and Flask do very well - especially if paired with something like Peewee.
+
+Beyond a certain point though you'll want Django, otherwise you'll just end up with a badly implemented version of the other half of Django, just written in Flask.
+
+---
+# Web
+
+## Templating
+
+Hard to go past jinja2. It's easy to use, very similar syntax to Django.
+
+You could probably get away with f-strings, but it depends on your application and where it's going.
+
+---
+# Email
+
+Python's standard library has  has implementations for most mail things - `email`, `smtplib`, `poplib`, `imaplib`
+
+There's an example of composing and sending a MIME email in the Hello Python source (Chapter 5)
+
+Getmail is a 3rd party mail client written in Python, if you need to download email from somewhere.
+
+---
+# Command line
+
+## arguments
+
+argparse is the standard option, supports lots of different argument types
+
+```
+import argparse
+
+parser = argparse.ArgumentParser(description='Short sample app')
+
+parser.add_argument('-a', action="store_true", default=False)
+parser.add_argument('-b', action="store", dest="b")
+parser.add_argument('-c', action="store", dest="c", type=int)
+
+print(parser.parse_args(['-a', '-bval', '-c', '3']))
+```
+
+If you only need a couple of options though, you can just check sys.argv
+```
+if '--test' in sys.argv:
+    # do test stuff
+```
+---
+# Command line
+
+# commands
+
+`shlex.split` is an obscure library, but will split up strings according to shell syntax, handling quotes and (I think) backslashes and escapes.
+
+I use it in the adventure modules in Hello Python, but it's generally useful.
+
+```
+>>> import shlex
+>>> shlex.split("attack 'large orc'")
+['attack', 'large orc']
+```
+
+---
+# Shiny things
+
+# Games
+
+The main two packages are PyGame and Pyglet. Pygame is more established, Pyglet is a bit newer and more Pythonic. They're both good, there are several examples in the code repository.
+
+# User Interfaces
+
+WxWindows is the normal recommendation if you want something native-ish.
+
+For multiplatform, there are other systems like Toga and Kivy. Toga is new and relatively untested, Kivy is better (but more complex from what I've seen).
+
+???
+        
+    - (EX) simple pygame / pyglet example (eg. grav, repulser)
+    - (EX) Sending MIME emails?
+    - (EX) scrape web site
+    - (EX) PyHP (if I can finish it :) )
+
+---
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+---
+# Questions?
+
+# Looking at code (together?)
+
+# Time for morning tea!
+
+    </textarea>
+    <script src="js/remark.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	var slideshow = remark.create({
+          highlightStyle: 'railscasts',
+          highlightLanguage: 'python',
+          highlightLines: true
+        });
+    </script>
+  </body>
+</html>

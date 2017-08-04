@@ -1,0 +1,185 @@
+
+/* roboto-condensed-regular - latin */
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Condensed'), local('RobotoCondensed-Regular'),
+       url('../fonts/roboto-condensed.woff2') format('woff2'),
+       url('../fonts/roboto-condensed.woff') format('woff');
+}
+
+/* ubuntu-mono-regular - latin-ext_latin */
+@font-face {
+  font-family: 'Ubuntu Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu Mono'), local('UbuntuMono-Regular'),
+       url('../fonts/ubuntu-mono.woff2') format('woff2'),
+       url('../fonts/ubuntu-mono.woff') format('woff');
+}
+
+/* droid-serif-regular - latin */
+@font-face {
+  font-family: 'Droid Serif';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Droid Serif'), local('DroidSerif'),
+       url('../fonts/droid-serif.woff2') format('woff2'),
+       url('../fonts/droid-serif.woff') format('woff');
+}
+
+
+#ghostery-purple-box {
+	display: none !important;
+}
+
+body {
+	font-family: 'Droid Serif';
+}
+h1, h2, h3 {
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+	margin-bottom: 10px;
+}
+.remark-slide-content h1 { font-size: 3em; }
+.remark-slide-content h2 { font-size: 2em; }
+.remark-slide-content h3 { font-size: 1.6em; }
+.footnote {
+	position: absolute;
+	bottom: 3em;
+}
+ul {
+	line-height: 1.5em;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+.inverse ul {
+	list-style-type: none;
+}
+.center ul {
+    text-align: left;
+    margin: 40px 40px;
+}
+
+.centerish h1, .centerish h2 {
+    text-align: center;
+}
+
+li p { line-height: 1.5em; }
+.red { color: #fa0000; }
+.large { font-size: 2em; }
+a, a > code {
+	color: rgb(249, 38, 114);
+	text-decoration: none;
+}
+code {
+	background: #e7e8e2;
+	border-radius: 5px;
+}
+.inverse code {
+    background: none;
+    border-radius: none;
+}
+
+.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+.remark-code-line-highlighted     { background-color: #373832; }
+.pull-left {
+	float: left;
+	width: 47%;
+}
+.pull-right {
+	float: right;
+	width: 47%;
+}
+.pull-right ~ p {
+	clear: both;
+}
+
+.pull-left-wide {
+    float: left;
+    width: 90%;
+    text-align: left;
+}
+
+.width100pc img{
+    width: 100%;
+}
+
+.height250 img {
+    height: 250px;
+    margin-left: 30px;
+}
+
+#slideshow .slide .content code {
+	font-size: 0.8em;
+}
+#slideshow .slide .content pre code {
+	font-size: 0.9em;
+	padding: 15px;
+}
+.inverse {
+	background: #272822;
+	color: #fff;
+	text-shadow: 0 0 20px #333;
+}
+.inverse h1, .inverse h2 {
+	color: #f3f3f3;
+	line-height: 1.2em;
+  }
+
+
+/* Slide-specific styling */
+#slide-inverse .footnote {
+	bottom: 12px;
+	left: 20px;
+}
+#slide-how .slides {
+	font-size: 0.9em;
+	position: absolute;
+	top:  151px;
+	right: 140px;
+}
+#slide-how .slides h3 {
+	margin-top: 0.2em;
+}
+#slide-how .slides .first, #slide-how .slides .second {
+	padding: 1px 20px;
+	height: 90px;
+	width: 120px;
+	-moz-box-shadow: 0 0 10px #777;
+	-webkit-box-shadow: 0 0 10px #777;
+	box-shadow: 0 0 10px #777;
+}
+#slide-how .slides .first {
+	background: #fff;
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	z-index: 1;
+}
+#slide-how .slides .second {
+	position: relative;
+	background: #fff;
+	z-index: 0;
+}
+
+/* Two-column layout */
+.left-column {
+	color: #777;
+	width: 25%;
+	height: 92%;
+	float: left;
+}
+.left-column h2:last-of-type, .left-column h3:last-child {
+    color: #000;
+}
+.right-column {
+	width: 70%;
+	float: right;
+	/* padding-top: 1em; */
+}
+.right-column p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}

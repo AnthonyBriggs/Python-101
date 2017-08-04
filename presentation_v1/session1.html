@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentation Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="css/style.css" media="all" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source" style="display: none;">
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+
+# Python 101
+
+![Python logo](img/python-logo-large.png)
+
+## Anthony Briggs
+
+---
+
+layout: true
+class: center, top, inverse
+---
+
+# About me
+
+![Anthony](img/Anthony.jpg)
+
+---
+# About me
+
+## Background
+--
+
+ - I had home computers when growing up: C64, Amiga, PCs
+--
+
+ - Wrote simple programs for fun (basic), troubleshooting
+--
+
+ - Started out working as IT support
+--
+
+ - I learned on the job and worked up to sysadmin
+---
+
+# About me
+
+## Meanwhile...
+
+ - I'd been playing an online game called Atlantis
+--
+
+ - Fiddly, play-by-email wargame - lots of turns, orders, diplomacy, messages
+---
+
+![A fiddly Atlantis turn](img/atlantis_turn.png)
+
+---
+# About me
+
+## Meanwhile...
+
+ - I'd been playing an online game called Atlantis
+ - Fiddly, play-by-email wargame - lots of turns, orders, diplomacy, messages
+ - I wrote a lot of code to automate GMing it
+--
+
+ - and then to combine maps to share with alliance members
+--
+
+ - and then to automate playing the boring bits
+
+--
+ - (and called it Genghis)
+--
+
+ - like, *lots and lots* of code
+--
+
+ - ...and that gave me enough experience to land a job programming python
+ 
+???
+It sounds like I launced a career off the back of one trivial game, but 
+in hindsight writing these sorts of apps was a good intro to business programming:
+downloading, parsing, data storage, building a model, 
+
+---
+
+# About me
+
+## Ultimately
+
+ - I've been working in Python around Melbourne ever since
+--
+
+ - I started the original Melbourne PUG
+--
+
+ - And wrote Hello(!) Python in 2010-2012
+---
+
+# Teaching
+
+## How I teach
+
+ - Observation: "Old programmers" never sat down and read a tutorial
+--
+
+ - No internet
+--
+
+ - Limited documentation
+--
+
+ - Needed to experiment
+---
+
+# Teaching
+
+## What this means
+
+ - Start with small programs and build up from there
+--
+
+ - You won't understand everything
+--
+
+ - Human brains and memory are associative
+--
+
+ - There'll be a point where the dots start "joining up" 
+--
+
+ - Note taking and journalling can be important: write down questions as you think of them
+--
+
+ - Questions lead to more questions
+--
+
+ - No questions means that you haven't understood the thing :)
+---
+
+# Who's in the class?
+
+## Survey results
+
+![Using Python: to be a programmer, or to learn work-related skills](img/using_python_for.png)
+
+???
+A mix of new devs and experienced ones, I'll try to keep things interesting, but not leave too many people behind
+
+We're going to be learning some simple stuff to start, then moving on to automating email, reading csv files and web scraping
+
+---
+
+# What do we want to learn?
+
+## Survey results
+
+![Topics requested: web scraping, web applications, automation](img/requested_topics.png)
+
+---
+
+# How do we want to learn it?
+
+## Survey results
+
+![Topics requested: web scraping, web applications, automation](img/learning_styles.png)
+
+???
+This fits neatly with how I work, so we're all good :)
+
+---
+
+# A couple of late entries!
+
+## Survey results
+
+![Two late entries in fun/curiosity... too late!](img/no_fun.png)
+
+--
+
+ - Too late, no fun for you
+ 
+---
+
+# Tutorial plan
+
+ - 3 hour format with a half hour break for morning tea
+--
+
+ - 9AM-10.30AM and 11AM-12.30AM
+--
+
+ - 6 x 25 minute sessions:
+   - Intro (5 mins)
+   - 5-10 mins explanation
+   - Example code and/or experimentation
+   - 5 min question time
+   
+--
+
+But this will depend on how the class is going. I might throw in more explanations or demos if things go quickly or slowly
+
+---
+
+# Sessions
+
+ - 1) This session! Introduction, background and getting started
+--
+
+ - 2) Basic syntax of Python
+--
+
+ - 3) Useful libraries - 3rd party and standard
+--
+
+ - Morning tea
+--
+
+ - 4) Classes
+--
+
+ - 5) Packaging and deployment, Python 2 vs. 3, ???
+--
+
+ - 6) Where to from here?
+
+--
+
+These are a rough guide. We may go slower or faster, or end up doing different things towards the end.
+
+---
+
+# Python overview
+
+## What's so great about Python?
+
+---
+
+# Python overview
+
+## Python is pragmatic
+
+ - It was built to _do things_ from the very start
+--
+
+ - by professional programmers with a professional process
+--
+
+ - It's pretty fast ("fast enough")
+--
+
+ - It's got a nice, clean syntax
+
+---
+
+# Python overview
+
+## Python is pragmatic
+
+ - You can do wild things if you need to, like monkey patching
+--
+
+ - but don't.
+--
+
+ - Python strikes a balance between robustness, reliability, maintainability...
+--
+
+ - and getting things done.
+
+---
+
+# Python overview
+
+## Easy syntax
+
+ - white space indentation
+ - lack of brackets / weird punctuation
+ - pretty good std lib
+ - duck typing
+ - underscores and dunderscores
+--
+
+ - all things that will help speed you up, but without being unmaintainable
+---
+
+# Python overview
+
+## not srs biznis
+
+ - named after Monty Python
+ - Guido's time machine
+ - RKM's series of puns for BeeWare
+ - Open a Python prompt, type "import this"
+ - or "from future import braces"
+
+---
+layout: true
+---
+.left-column[
+  ## Short exercise!
+
+  ## Coding!!1! (ish)
+
+  ## (Starting simply)
+]
+.right-column[
+We're making sure that everyone's clear to go before the next section. If you get stuck on any of these things, Winnie, Srinath and I will help you out.
+- Make sure that you can open a *REPL* (Python prompt)
+- Download (and unzip) the code samples and exercises from github: http://github.com/AnthonyBriggs/Python-101
+- Try and run the fizzbuzz.py .red[*] script in the root folder
+  - you can double click it
+  - or open a terminal and try it from the command line:
+  
+  ```bash
+  python-101> python fizzbuzz.py
+  ```
+
+.footnote[.red[*]  Experienced programmers: Yes, yes, I know]
+]
+
+---
+.left-column[
+  ## Help
+]
+.right-column[
+  In a Python prompt, you can use the ```help(thing)``` command to see help on a particular function. It'll show 'docstrings', which are included in Python functions and modules to describe what they do.
+  
+  ```python
+  >>> help(list)
+Help on class list in module builtins:
+
+class list(object)
+ |  list() -> new empty list
+ |  list(iterable) -> new list initialized
+ |                      from iterable's items
+ |
+ |  Methods defined here:
+ |
+ |  __add__(self, value, /)
+ |      Return self+value.
+```
+]
+
+---
+.left-column[
+  ## Help
+  ## Debugging
+]
+.right-column[
+  If there's an error in a Python program and it can't work out what to do, you'll get a **traceback**. Also known as an exception.
+  
+  Try running `fizzbuzz_broken.py`
+
+```python
+python 101\codes> python .\fizzbuzz_broken.py
+Fizzbuzz
+1
+2
+Fizz
+4
+Traceback (most recent call last):
+  File ".\fizzbuzz_broken.py", line 8, in <module>
+    print(Buzz)
+NameError: name 'Buzz' is not defined
+```
+
+Whoops.
+]
+---
+.left-column[
+  ## Help
+  ## Debugging
+]
+.right-column[
+  Here's a big flowchart of common Python errors, and probable fixes for them.
+  
+  ![Python traceback debugging flowchart](img/python_traceback_flowchart.png)
+  
+  There's a larger (PDF) version at https://pythonforbiologists.com/29-common-beginner-errors-on-one-page/
+
+  You can use it to fix the error in `fizzbuzz_broken.py`, but don't do that just yet
+]
+
+---
+.left-column[
+  ## Help
+  ## Debugging
+  ## Prevention
+]
+.right-column[
+  Even better than fixing errors is preventing them from happening. Python has a style guide called PEP8.
+  
+  If you don't have it already, install pylint:
+  
+  `pip install pylint`
+  
+  (there's also one called flake8)
+  
+  ```bash
+python 101\codes> pylint .\fizzbuzz_broken.py
+No config file found, using default configuration
+************* Module fizzbuzz_broken
+E: 10,14: Undefined variable 'Buzz' (undefined-variable)
+
+--------------------------------------------------------
+Your code has been rated at 3.75/10 
+    (previous run: 3.75/10, +0.00)
+```
+]
+---
+
+.left-column[
+  ## Help
+  ## Debugging
+  ## Prevention
+  ## Helping
+]
+.right-column[
+  Finally, if you *really* want to master something, the best way is to teach it to someone else. They have a different perspective, and will ask different questions.
+  
+  If you see your neighbor having trouble with something, help them out! Or ask them for help if you're stuck.
+  
+  Myself, Winnie and Srinath are here to help too.
+]
+---
+
+name: last-page
+template: inverse
+
+## Question time
+
+## 5 minute break
+
+
+    </textarea>
+    <script src="js/remark.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	var slideshow = remark.create({
+          highlightStyle: 'railscasts',
+          highlightLanguage: 'python',
+          highlightLines: true
+        });
+    </script>
+  </body>
+</html>

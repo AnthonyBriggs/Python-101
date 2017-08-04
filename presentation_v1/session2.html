@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentation Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="css/style.css" media="all" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source" style="display: none;">
+
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+# Session 2
+
+## Python's basic syntax
+
+---
+name: default
+layout: true
+
+---
+.left-column[
+  ## Basics
+]
+.right-column[
+  ##Program Flow
+The python interpreter starts at the top of a program, and works its way down, line by line.
+]
+
+--
+.right-column[
+ - but it can jump around if you loop, or call a function.
+]
+--
+.right-column[
+ - sometimes these jumps will be "implicit": Python will call them behind the scenes
+]
+
+---
+.left-column[
+  ## Basics
+]
+.right-column[
+  ## Variables
+  
+ Most introductory programming texts describe variables as "little boxes"
+  
+.width100pc[ ![Three boxes with variables in them](img/little_boxes.png) ]
+]
+--
+.right-column[
+ This is true in languages like C, that deal directly with memory addresses, but not in Python
+
+]
+
+---
+.left-column[
+## Basics
+]
+.right-column[
+## Variables
+ 
+ In Python, creating a variable is more like sticking a label on a piece of data so you can find it again.
+ 
+.height250[ ![A paper label on a piece of string](img/label_tag.jpg) ]
+]
+--
+.right-column[
+So if you type `a = "Hello World"`, the label `a` will be attached to the string `"Hello World"`
+]
+--
+.right-column[
+if you then type `b = a`, `b` will *also* be attached to the string `"Hello World"`
+]
+
+---
+.left-column[
+  ## Basics
+]
+.right-column[
+## Variables
+
+Variables can point to any Python structure, including functions, instances, classes, modules (we'll see how to use this later on)
+]
+
+--
+.right-column[
+They start with a letter or underscore, and continue with letters, underscores and numbers.
+]
+--
+.right-column[
+## Typing
+
+Python is a dynamic language, but also strongly typed
+]
+--
+.right-column[
+`"1" + 1` will raise a TypeError exception, because "1" is a string.
+]
+--
+.right-column[
+You'll need to **cast** some things to the right type, like this: `int("1") + 1`
+]
+--
+.right-column[
+There are some odd-looking exceptions to this rule though, like `"Hello World" * 5`
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: Numbers
+
+Python has several built-in numeric types
+
+]
+--
+.right-column[
+**Integers:** 0, 1, 2, ... They can go arbitrarily high and will use native integers where possible.
+]
+--
+.right-column[
+Higher value integers will switch to "Long integers" transparently.
+]
+--
+.right-column[
+**Floats:** These are fractional or real numbers, like 3.141592 or 0.0125
+]
+--
+.right-column[
+Floats are approximate, so you'll get odd errors for some values, especially high precision ones
+]
+--
+.right-column[
+```
+>>> sum([0.1] * 10)
+0.9999999999999999
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: Numbers
+
+Python will also convert between integer and float where necessary
+```
+>>> 3 / 2
+1.5
+>>> 3 // 2
+1
+```
+]
+--
+.right-column[
+If you definitely need arbitrary precision (usually if you're dealing with money) use the `decimal` module
+```
+>>> from decimal import Decimal
+>>> sum([Decimal("0.1")] * 10)
+Decimal('1.0')
+>>> Decimal(0.1)
+Decimal('0.1000000000000000055511151231257827021181583404541015625')
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: Strings
+
+Strings are a sequence of characters. There are two types: binary and unicode.
+
+**Note: If you're on Windows, you might want to use the IDLE editor for this next bit. Windows terminals don't use unicode.**
+]
+--
+.right-column[
+Binary strings are sequences of ascii bytes (0-255), like you might find in a file.
+```
+>>> "Hello".encode()
+b'Hello'
+>>> b"Hello".decode()
+'Hello'
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: Strings
+
+Unicode strings are sequences of characters. We use them because some characters need more than one byte
+
+```
+>>> '★Hello★'.encode()
+b'\xe2\x98\x85Hello\xe2\x98\x85'
+>>> b"\xe2\x98\x85Hello\xe2\x98\x85".decode("utf-8")
+'★Hello★'
+```
+]
+
+--
+.right-column[
+Note that you need to know what encoding to use when converting from bytes. Weird things happen when you use the wrong one
+```
+>>> b"\xe2\x98\x85Hello\xe2\x98\x85".decode("latin-1")
+'â\x98\x85Helloâ\x98\x85'
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: Using strings
+
+There are a few ways to declare a string
+
+    "double quotes"
+
+    'single quotes'
+
+    "it's ok to have single quotes within doubles"
+
+    'or "vice versa"'
+
+    'You can also \'escape\' quotes if you have to'
+
+    """Finally,
+    there are triple quoted strings,
+    which can run over multiple lines"""
+
+    '''They can be double
+    or single'''
+
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: Using strings
+
+Python will also concatenate strings that are next to each other
+
+```
+>>> print ("Hello "  "World")
+Hello World
+```
+
+And you can join up longer strings over multiple lines if you use brackets
+
+    >>> print ("Hello "
+    ... "Wor"
+    ... "ld")
+    Hello World
+]
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: Using strings
+
+Strings also have a lot of useful methods for information.
+
+```
+>>> "a string".endswith("string")
+True
+>>> "str" in "a string"
+True
+>>> "# A comment line".startswith("#")
+True
+```
+]
+--
+.right-column[
+... and manipulation
+ 
+```
+>>> "Mon Tues Wed Thu Fri Sat Sun".split()
+['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+>>> "   weird line   \n\n".strip()
+'weird line'
+>>> "anthony".title()
+'Anthony'
+```
+These can often save you using something more complex, like a regular expression.
+]
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: Using strings
+
+The final thing to talk about with strings is how to use them with variables.
+The easiest way is just to add them together:
+
+    print ("'a_string' is: " + a_string)
+    print ("'a_number' is: " + str(a_number)
+]
+--
+.right-column[
+In the past, you could also use '%' formatting (like C), and `.format()` strings
+
+    print ("'a_string' is: %s" % a_string)
+    print ("'a_number is: %d" % a_number)
+    
+    print ("'a_string' is: {}".format(a_string))
+    print (("'a_string' is: {0}, "
+            "'a_number' is {1}").format(a_string, a_number))
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+]
+.right-column[
+## Simple data types: F-strings
+
+In Python 3.6, there's a new type of string, called an f-string, which is a lot easier to use.
+
+```
+    print (f"'a_string' is: {a_string}, "
+           f"'a_number' is: {a_number}")
+```
+]
+--
+.right-column[
+Just put an `f` at the front of the string, and then the quoting is similar to templating languages like Django's - just wrap the variable name in curly quotes.
+]
+--
+.right-column[
+And they follow the `.format()` language specification, so you can align the printing, pad variables, access class attributes, dictionary keys, and so on.
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else/While
+]
+.right-column[
+## If and Else
+
+You can test something using expressions and run different code paths:
+```
+if a_number >= 42:
+    print ("The number is too high!")
+else:
+    print ("The number is ok.")
+```
+You can also use `if` just by itself
+]
+--
+.right-column[
+If you need to test multiple cases, then you can use `elif` too:
+```
+if a_number >= 42:
+    print ("The number is too high!")
+elif a_number >= 37:
+    print ("The number is very high!")
+elif a_number >= 29:
+    print ("The number is a little bit high...")
+else:
+    print ("The number is ok.")
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+]
+.right-column[
+## If and Else
+
+The tests in if statements can be anything:
+
+- values or variables - `True`, `None`, `"A string"`
+- logic statements, like `a >= 2`, `c < 5`, `d == "Test"`
+- a function or method call, `a_string.startswith("#")`
+- a combination, using `and`, `or`, `not` and brackets  `(a >= 2 or c < 5) and d == "Test"`
+]
+--
+.right-column[
+The concept of "truthiness":
+ - non-zero values and non-empty things are generally true
+ - zeros, blank strings and empty things are false
+ - not really good practice though - better to declare the test explicitly
+ 
+```
+if user_input == "":
+    print ("You need to enter a value")
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+]
+.right-column[
+## More complex data types: Structures
+
+Lots of data is structured. You might store information about someone, and need to know
+ - their name
+ - email address
+ - phone number
+ - who their friends are
+ 
+Or you might want to store a list of people at PyCon.
+]
+--
+.right-column[
+Using the right structure makes it easier and faster to get your data when you need it.
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+]
+.right-column[
+## Lists
+
+A bunch of things, stored in order. Can be anything in Python - strings, numbers, variables, other lists, etc.
+
+```
+my_list = ['1', 'Two', 3, None, a_string, [], [1, 2, 3]]
+```
+]
+--
+.right-column[
+You can access the contents with an index, by popping off the last element, or by looping over them
+
+```
+first_item = my_list[0]
+a_number = my_list[2]
+last_element = my_list[-1]
+first_three = my_list[:3]
+last_three = my_list[-3:]
+list_copy = my_list[:]
+
+my_list[5] = ['a', 'b', 'c']
+```
+]
+--
+.right-column[
+This removes the last element from `my_list` and puts it in `last_element`
+```
+last_element = my_list.pop()
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+]
+.right-column[
+## Dictionaries
+
+These are used for storing and quickly accessing values at will, using a key.
+
+The key has to be something static (hashable), like a number or string - it can't be something mutable like a list. The value can be anything.
+
+Keys also have to be unique. Reusing a key overrides the old value.
+```
+pycon_people['Anthony'] = ["Anthony", "Briggs", ...]
+```
+]
+--
+.right-column[
+To declare a dictionary, use curly brackets, like this:
+
+```
+pycon_people = {}
+pycon_people = {'Anthony': ["Anthony", "Briggs", ...], }
+```
+
+]
+--
+.right-column[
+If you need to test whether a key's in a dictionary, you can use the `in` keyword
+
+```
+"Anthony" in pycon_people
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+]
+.right-column[
+# Sets
+
+Similar to a dictionary, but just the keys. The items in it still have to be hashable, and testing for membership is fast.
+
+```
+pycon_registered = set("Anthony", "Richard", "Tennessee")
+pycon_registered = {"Anthony", "Richard", "Tennessee"}
+```
+]
+--
+.right-column[
+```
+>>> "Bruce" in pycon_registered
+False
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+]
+.right-column[
+# Tuples
+
+These are like a static list. You can't add extra elements to them, or change existing elements (Unless they're mutable). Tuples are useful for things like points in geometry (x, y) or fixed rows of data.
+
+```
+2d_point = (2, 3)
+```
+]
+--
+.right-column[
+Tuples are also used in multiple assignment:
+
+```
+x, y = 2, 3
+```
+The tuple is actually defined by the comma, not the brackets
+
+```
+>>> 2d_point = 2, 3
+>>> 2d_point
+(2, 3)
+>>> type(2d_point)
+<class 'tuple'>
+```
+(But don't do this, it's terrible)
+
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+  ## Looping
+]
+.right-column[
+## For loops
+
+Anything which can have multiple elements in it (technically called "iterables") can be used in a for loop.
+
+(All the data types we've used so far except numbers are iterable - strings will loop over each character)
+
+Let's say we want to send a reminder email to everyone on our mailing list who hasn't registered for PyCon AU yet...
+```
+# pycon_people = {'name': [first, last, email, ...] }
+for name, person in pycon_people.items():
+    if name not in pycon_registered:
+        email = person[2]
+        send_pycon_nag_email(
+            name=person[0], 
+            email=email)
+```
+
+Caveat: Don't fiddle with something while you're looping over it
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+  ## Looping
+]
+.right-column[
+## Looping
+
+You can use `break` to stop a loop completely, and `continue` to stop the current one and start on the next.
+
+```
+for name, person in pycon_people.items():
+    if name in pycon_registered:
+        continue
+        
+    # ... later on ...
+    
+    if smtp_status == "permanent error":
+        log("The mail server is down!")
+        break
+```
+]
+--
+.right-column[
+There are also two built-in functions, `sorted` and `reversed`, which can help with some iterables.
+
+```
+for name in sorted(pycon_registered):
+    log("Registered person: " + name)
+```
+
+Sorted also has a `reverse` keyword: `sorted(thing, reverse=True)`
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+  ## Looping
+]
+.right-column[
+## While loops
+
+These aren't used very often, but can be handy.
+
+```
+while pycon_tickets_remaining > 0:
+    handle_ticket_registration(person)
+    pycon_tickets_remaining -= 1
+```
+]
+--
+.right-column[
+You can also use them as infinite (indefinite?) loops or event loops:
+
+```
+while True:
+    if something_happened():
+        break
+```
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+  ## Looping
+]
+.right-column[
+## List comprehensions
+
+You can think of these as super fast `for` loops, since the iteration part is handled by C.
+
+```
+reg_people = [person for person in pycon_people.values()
+                 if person[0] in pycon_registered]
+```
+
+They're more declarative, that is, you tell Python what you want, rather than how to get it.
+
+"I want each person in `pycon_people`'s values, ***if*** that person's name is in `pycon_registered`"
+
+]
+--
+.right-column[
+The item, the iterable and the if statement can be pretty much any python expression
+
+```
+ = [person[0] + person[1] ... ]
+ = [... if person[0] in pycon_registered and
+           "example.com" not in person[2]]
+```
+
+.footnote[.red[*]  These are readable versions of map, filter and lambda, and are copied from Haskell]
+]
+
+---
+.left-column[
+  ## Basics
+  ## Data types
+  ## If/Else
+  ## Data structures
+  ## Looping
+]
+.right-column[
+## Other comprehensions
+
+There are other types of comprehensions that you can use.
+
+**Generator expressions** will generate the iterable one element at a time, useful for larger sets, or ones with expensive elements.
+```
+reg_people = (person for person in pycon_people.values()
+                 if person[0] in pycon_registered)
+```
+]
+--
+.right-column[
+
+**Set and dictionary comprehensions** are (funnily enough) the set and dictionary equivalents of list comprehensions.
+
+```
+test_emails = {person[3] for person in pycon_people.values()
+                if "example.com" in person[2]}
+emails = {person[0] + person[1]: person[2]
+                for person in pycon_people.values()}
+```
+]
+
+---
+
+class: center, middle, inverse
+
+# Short break?
+
+# Questions? 
+
+# Sample code?
+
+---
+.left-column[
+  ## Functions
+]
+.right-column[
+## Functions
+
+Functions are a way of partitioning off sections of your program so that it's easier to understand, the parts are less coupled, and you can reuse them.
+
+```
+def printable_person(person):
+    return (f'{person[0]} {person[1]}, '
+      f'email: "{person[0]} {person[1]}" <{person[2]}>')
+```
+]
+--
+.right-column[
+Functions (usually) have a name, a number of *arguments* that you provide when you call them, and can return a value.
+
+```
+>>> details = printable_person(person)
+'Anthony Briggs, email: "Anthony Briggs" <anthony@example.com>'
+```
+
+The number of arguments have to correspond. If you call a function with a different number, Python will raise a TypeError.
+]
+---
+.left-column[
+  ## Functions
+]
+.right-column[
+## Doc strings
+
+Functions can (should!) have a string immediately after them, which documents what they do.
+
+```
+def printable_person(person):
+    """A printable representation of a person,
+       used in the admin screen."""
+    return (f'{person[0]} {person[1]}, '
+      f'email: "{person[0]} {person[1]}" <{person[2]}>')
+```
+
+It'll appear in `help()`, and you can see it through the __doc__ attribute.
+]
+---
+.left-column[
+  ## Functions
+]
+.right-column[
+## Keyword arguments
+
+You can provide arguments by name if there are a lot of them, or it makes your program more readable.
+
+```
+speaker_details = printable_person(person=speaker)
+send_email(to=speaker_email,
+           sender=pycon_organiser, 
+           subject="Your talk ...",
+           content="Dear Speaker, ...")
+```
+
+Keyword arguments need to come after any unnamed arguments, otherwise you can't tell which are which.
+]
+--
+.right-column[
+There's also a syntax which allows you to assign arguments and keyword arguments to a list and dictionary instead of individual variables. 
+
+```
+def special_function(*args, **kwargs):
+    name = args[0]
+    email = kwargs['email']
+```
+
+You can also call functions using `*` and `**`.
+]
+
+---
+.left-column[
+  ## Functions
+]
+.right-column[
+## Default arguments
+
+Finally, you can define your functions with default arguments. If they're not specified when the function's called, then they'll get their defaults.
+
+```
+def add_person(first_name, last_name, 
+               email="", phone="", address=""):
+    "Add a new person to the database."
+```
+]
+--
+.right-column[
+**There's a catch though.** The default arguments are created when the function is defined, not when it's called. So if your default argument is mutable, like a list or a dictionary, make sure you copy it if you're going to change it.
+
+```
+def add_person(..., talks=[]):
+    "Add a person, including their talks"
+    # ...
+    for talk in get_talks(person):
+        talks.append(talk)
+    person.talks = talks  # this will bite you!
+```
+]
+
+---
+.left-column[
+  ## Functions
+  ## Exceptions
+]
+.right-column[
+## Handling exceptions
+
+When Python runs into something it can't handle, it raises an Exception.
+
+Sometimes this is an error, but some libraries use it as a normal operation. It's possible to handle any exception that Python throws (except `SyntaxError`).
+
+To do that, wrap your code in an exception handler, also called a `try..except` statement.
+
+```
+empty_list = []
+try:
+    print (empty_list[2])
+except IndexError as error:
+    print ("There was an IndexError:", error)
+```
+If an `IndexError` is raised in the try clause, it'll jump to the except part and print the error, then continue with the code after that.
+]
+
+---
+.left-column[
+  ## Functions
+  ## Exceptions
+]
+.right-column[
+## Handling multiple exceptions
+
+You can extend a `try..except` to handle multiple exceptions, by listing them one after the other
+
+```
+try:
+    print (empty_list[2])
+except IndexError as error:
+    print ("There was an IndexError:", error)
+except NameError as error:
+    print ("There was a NameError:", error)
+```
+]
+
+--
+.right-column[
+You can also set up a 'catch-all' handler, **but** this is bad practice. You'll catch exceptions you shouldn't and make your programs harder to debug.
+
+```
+empty_list = []
+try:
+    print (empty_list["2"])
+except:
+    print("There was some sort of error.")
+
+try:
+    print (empty_list["2"])
+except Exception as error:
+    print (f"There was a {type(error).__name__}:", error)
+```    
+
+]
+
+---
+name: last-page
+template: inverse
+
+## Question time?
+
+## Let's look at some code?
+
+## 5 minute break
+
+
+    </textarea>
+    <script src="js/remark.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	var slideshow = remark.create({
+          highlightStyle: 'railscasts',
+          highlightLanguage: 'python',
+          highlightLines: true
+        });
+    </script>
+  </body>
+</html>

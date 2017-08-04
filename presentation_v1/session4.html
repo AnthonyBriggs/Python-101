@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentation Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="css/style.css" media="all" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source" style="display: none;">
+
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+# Classes
+
+---
+# Classes
+
+## Classes are fun! 
+--
+No, really
+--
+
+## They're less complex than they look
+
+---
+
+name: inverse
+layout: true
+class: centerish, top, inverse
+
+---
+# Classes
+
+## Rough theory
+
+You can think of Classes as a rubber stamp - once you've carved it, you can use it to stamp out lots of copies (instances).
+
+.center[ ![](img/rubber_star_stamp.jpg) ]
+
+Classes usually have functions, and Instances will have stored data.
+
+???
+This is the rough, 90% correct version :) Some classes will be different
+---
+# Classes
+
+## Rough theory
+
+There's no difference between a method and a function. The only catch is that a class method will have a leading argument called `self` (by convention), which Python will set as the class instance.
+
+```
+class Player(object):
+    def __init__(self, location):
+        self.name = "Player"
+```
+
+You can even insert functions to monkeypatch instances (don't do that).
+
+---
+# Classes
+
+## Rough theory
+
+Classes and instances have an internal dictionary, called __dict__, which is a store of functions and variables that belong to that class or instance.
+
+When you access an attribute, Python looks it up in the instance, then the class, then any other plces, like parent classes.
+
+```
+>>> datetime.datetime
+<class 'datetime.datetime'>
+>>> tut_start = datetime.datetime(2017, 8, 3, 9, 0, 0, 0)
+>>> tut_start.strftime("%Y-%m-%d")
+'2017-08-03'
+```
+
+???
+Talk about dunder methods
+
+Talk about how the data and methods are stored in the datetime example.
+
+---
+# Classes
+
+## Inheritance
+
+Class inheritance works in a similar way. You can declare classes to be copies of another class, then change the bits that are different.
+
+```
+class Player(object):
+    def __init__(self, location):
+        self.name = "Player"
+```
+
+```
+import player
+
+class Monster(player.Player):
+    def __init__(self, location, name, description):
+        player.Player.__init__(self, location)
+        self.name = name
+```
+
+???
+Look at monster / player class in Hello Python? Or the skippable API in bad_tweets?
+
+Maybe talk about this being a bad design? Mobile -> Player and Monster?
+---
+# Classes
+
+## Inheritance
+
+A better way to handle initialisation is to use the `super()` function, like this:
+
+```
+class Monster(player.Player):
+    def __init__(self, location, name, description):
+        super().__init__(self, location)
+```
+
+`super()` will automatically find the parent class, and maintain the right order when looking up attributes in more complex classes.
+
+```
+class UrukHai(Mobile, Combatant, AllianceMember, Magician):
+    def __init__(self, location, name, description, items, alliance):
+        super().__init__(self, location, name, description, items, alliance)
+```
+
+Having more than one parent class is called Multiclassing, or a Mixin class.
+---
+# Classes
+
+## Dunder methods
+
+Internal Python class methods are often called "Dunder methods" (for Double UNDERscore)
+
+There's nothing special about the functions or attributes themselves, but they're the 'hooks' that the Python interpreter will use in certain situations.
+
+`__init__` is used to populate an instance's data 
+
+`__str__` will return a printable string identifying the instance
+
+`__repr__` returns a code-based representation of the instance
+
+`__doc__` will return the docstring for the class or function
+
+`__dict__` has all of the methods and attributes for that class or instance.
+
+---
+# Classes
+
+## Attribute access
+
+There are a few special methods called around class attribute access too.
+
+- `__getattribute__(self, key)`, called to return an attribute
+
+- `__getattr__(self, key)`, called to return an attribute, *if* `key` isn't found.
+
+- `__setattr__(self, key, value)`, called to set an attribute, *if* `key` isn't found.
+
+- `__delattr__(self, key)` to delete
+
+- `__dir__` should return the equivalent of `dir()`
+
+Mailsnake (https://github.com/Leftium/mailsnake/blob/master/mailsnake/mailsnake.py) is a good example
+???
+getattribute can be dangerous
+
+---
+# Classes
+
+## Copying other types of object
+
+If you want to write a class which behaves like some of the built in classes, there are methods for that, too. Dictionaries use the following methods
+
+- `__getitem__(self, key)` to look up a value in the dictionary
+
+- `__setitem__(self, key, value)` to set a value
+
+- `__delitem__(self, key)` to delete a value
+
+- `__missing__(self, key)` to handle or provide a value for a missing key
+
+
+???
+Properties?
+Metaclasses: "Don't do that"? "What even are metaclasses"? :)
+Iterator protocol?
+    
+- (EX|show) mailsnake example: https://github.com/Leftium/mailsnake/blob/master/mailsnake/mailsnake.py
+- (EX) adventure game?
+- (EX) online shopping or data parsing example?
+
+---
+
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+
+# Questions?
+
+# Look at some code?
+
+# Short break
+
+    </textarea>
+    <script src="js/remark.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	var slideshow = remark.create({
+          highlightStyle: 'railscasts',
+          highlightLanguage: 'python',
+          highlightLines: true
+        });
+    </script>
+  </body>
+</html>
